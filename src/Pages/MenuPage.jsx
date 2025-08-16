@@ -5,6 +5,7 @@ import { Navigate } from 'react-router'
 import { Link } from 'react-router'
 import {CartContext} from '../context/CartContext.jsx'
 import MenuItemCard from '../components/MenuItemCard.jsx'
+import { categoryInfo } from '../data/categoryInfo.js'
 
 const MenuPage = () => {
 
@@ -44,6 +45,13 @@ const MenuPage = () => {
     }
     setFilteredItems(items)
   }, [menuItems, category, search])
+
+  const groupedItems = {
+    Starters: filteredItems.filter(item => item.category === 'Starters'),
+    'Main Course': filteredItems.filter(item => item.category === 'Main Course'),
+    Desserts: filteredItems.filter(item => item.category === 'Desserts'),
+    Beverages: filteredItems.filter(item => item.category === 'Beverages'),
+  }
 
   return (
     <div className='min-h-screen bg-gray-50'>
@@ -94,11 +102,32 @@ const MenuPage = () => {
     {filteredItems.length===0?(
       <p className='text-gray-500'>No items match your search</p>
     ) : (
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
+      <div className='px-6 py-10 max-w-7xl mx-auto'>
+        {Object.entries(groupedItems)
+        .filter(([cat])=>!category || cat === category)
+        .map(([cat,items])=>{
+          const info = categoryInfo[cat]
+          return(
+            <section key={cat} className='mb-16'>
+              <h2 className='text-3xl font-bold text-emerald-700'>{info.title}</h2>
+              <p className='text-gray-500'>{info.description}</p>
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
+                {items.map(item => (
+                  <MenuItemCard key={item._id} item={item} />
+                ))}
+              </div>
+            </section>
+          )
+        })}
+
+        
+      {/* <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
         {filteredItems.map(item => (
           <MenuItemCard key={item._id} item={item} />
         ))}
+      </div> */}
       </div>
+    
     )}
     
   

@@ -19,12 +19,17 @@ const HomePage = () => {
         }
         setLoading(true)
         try{
-            await axios.post('http://localhost:5000/api/tables',
-                 { tableNumber })
+            const res = await axios.post('http://localhost:5000/api/tables',{tableNumber})
+            localStorage.setItem('tableId',res.data._id)
             toast.success("Table number added successfully")
             navigate('/menu')
+            
         } catch (error) {
-            toast.error("Something went wrong")
+            if(error.response?.status === 409) {
+                toast.error("Table already exists")
+            } else {
+                toast.error("Something went wrong")
+            }
         } finally {
             setLoading(false)
         }
