@@ -8,9 +8,18 @@ const orderItemRoutes = require('./routes/orderItemRoutes');
 const customerOrderRoutes = require('./routes/customerOrderRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 
+
+
+
+
+
 const app = express();
+const session = require('express-session');
 app.use(cors());
 app.use(express.json());
+
+
+
 
 // Test route
 app.get('/', (req, res) => {
@@ -26,6 +35,7 @@ app.use('/api/menu', require('./routes/menuRoutes'));
 app.use('/api/order-items', require('./routes/orderItemRoutes'));
 app.use('/api/customer-orders', require('./routes/customerOrderRoutes'));
 app.use('/api/payments', require('./routes/paymentRoutes'));
+
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI)

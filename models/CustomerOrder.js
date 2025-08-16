@@ -14,7 +14,7 @@ customerOrderSchema.pre('save', async function(next) {
     try {
         if (this.isNew || this.isModified('items')) {
             const items = await mongoose.model('OrderItem').find({ _id: { $in: this.items } });
-            this.totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0);
+            this.totalPrice = items.reduce((total, item) => total + item.price, 0);
         }
         next();
     } catch (error) {
