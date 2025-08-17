@@ -14,7 +14,7 @@ const paymentRoutes = require('./routes/paymentRoutes');
 
 
 const app = express();
-const session = require('express-session');
+
 app.use(cors());
 app.use(express.json());
 

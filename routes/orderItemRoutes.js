@@ -10,15 +10,27 @@ router.post('/', async (req, res) => {
         await orderItem.save();
         res.status(201).json(orderItem);
     } catch (error) {
+        console.error('Error creating order item:', error);
         res.status(400).json({ error: error.message });
     }
 });
+
+// POST /api/order-items/bulk
+router.post('/bulk', async (req, res) => {
+  try {
+    const orderItems = await OrderItem.find({ _id: { $in: req.body.ids } }).populate('menuItem');
+    res.status(200).json(orderItems);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 // get order items
 
 router.get('/', async (req, res) => {
     try {
-        const orderItems = await OrderItem.find().populate('MenuItem');
+        const orderItems = await OrderItem.find().populate('menuItem');
         res.status(200).json(orderItems);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -28,7 +40,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const orderItem = await OrderItem.findById(req.params.id).populate('MenuItem');
+        const orderItem = await OrderItem.findById(req.params.id).populate('menuItem');
         if (!orderItem) {
             return res.status(404).json({ error: 'Order item not found' });
         }

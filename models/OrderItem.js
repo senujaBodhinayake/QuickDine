@@ -5,6 +5,7 @@ const orderItemSchema = new mongoose.Schema({
     menuItem:{type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', required: true},
     quantity:{type: Number, required: true, min: 1},
     price:{type: Number, min: 0},
+    // cartPrice:{type: Number, min: 0},
     notes:{type: String, maxlength: 500},
 });
 orderItemSchema.pre('save', async function(next) {

@@ -2,12 +2,14 @@ const mongoose = require('mongoose');
 const Table = require('./Table');
 
 const customerOrderSchema =  new mongoose.Schema({
-    Table: { type: mongoose.Schema.Types.ObjectId, ref: 'Table', required: true },
+    table: { type: mongoose.Schema.Types.ObjectId, ref: 'Table', required: true },
     status: { type: String, enum: ['pending', 'completed', 'cancelled'], default: 'pending' },
+    paymentMethod: {type: String,enum: ['cash', 'card', 'upi'],default: 'cash'},
     placedTime: { type: Date, default: Date.now },
     totalPrice: { type: Number },
     items:[{type: mongoose.Schema.Types.ObjectId, ref: 'OrderItem'}],
     
+
 });
 
 customerOrderSchema.pre('save', async function(next) {

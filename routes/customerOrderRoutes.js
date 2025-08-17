@@ -16,12 +16,38 @@ router.post('/', async (req, res) => {
 });
 
 // get orders
-router.get('/', async (req, res) => {
+// router.get('/', async (req, res) => {
+//     try {
+//         const orders = await CustomerOrder.find({table:req.params.tableId})
+//         .populate('items')
+//         .populate('table');
+//         res.status(200).json(orders);
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
+// });
+router.get('/table/:tableId', async (req, res) => {
+  try {
+    const orders = await CustomerOrder.find({ table: req.params.tableId })
+      .populate('items')
+      .populate('table');
+
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+router.get('/:id', async (req, res) => {
     try {
-        const orders = await CustomerOrder.find({table:req.params.tableId})
-        .populate('items')
-        .populate('Table');
-        res.status(200).json(orders);
+        const order = await CustomerOrder.findById(req.params.id)
+            .populate('items')
+            .populate('table');
+        if (!order) {
+            return res.status(404).json({ error: 'Order not found' });
+        }
+        res.status(200).json(order);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
