@@ -34,8 +34,11 @@ const CartPage = () => {
   
  
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  
+
 
   const handlePlaceOrder = async () => {
+    console.log('cart:', cart)
     if(!tableId){
       toast.error('Table not set. Please restart your order.');
       navigate('/')
@@ -46,18 +49,34 @@ const CartPage = () => {
 
       //creating order items
       const orderItemIds = [];
+      for (const item of cart) {
+  const payload = {
+    menuItem: item._id, 
+    quantity: item.quantity,
+    price: item.price,
+    notes: notes[item._id] || ''
+  };
+  console.log('Sending order item:', payload);
+
+  const res = await axios.post('http://localhost:5000/api/order-items/bulk', payload);
+  orderItemIds.push(res.data._id);
+}
+
+
       for(const item of cart) {
-        const res = await axios.post('http://localhost:5000/api/order-items', {
+        const res = await axios.post('http://localhost:5000/api/order-items/bulk', {
           menuItem: item._id,
           quantity: item.quantity,
           price: item.price,
+          // cartPrice:subtotal,
           notes: notes[item._id] || ''
         });
         orderItemIds.push(res.data._id);
       }
       // Create customer order
       const orderRes = await axios.post('http://localhost:5000/api/customer-orders', {
-        Table: tableId,
+
+        table: tableId,
         paymentMethod,
         items: orderItemIds,
       
