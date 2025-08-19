@@ -3,7 +3,7 @@ const Table = require('./Table');
 
 const customerOrderSchema =  new mongoose.Schema({
     table: { type: mongoose.Schema.Types.ObjectId, ref: 'Table', required: true },
-    status: { type: String, enum: ['pending', 'completed', 'cancelled'], default: 'pending' },
+    status: { type: String, enum: ['active', 'cancelled'], default: 'active' },
     paymentMethod: {type: String,enum: ['cash', 'card', 'upi'],default: 'cash'},
     placedTime: { type: Date, default: Date.now },
     totalPrice: { type: Number },

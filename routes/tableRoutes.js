@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Table = require('../models/Table');
+const OrderItem = require('../models/OrderItem');
+const CustomerOrder = require('../models/CustomerOrder');
 
 //creating a new table
 
@@ -100,6 +102,25 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+router.delete('/:tableId/reset', async (req, res) => {
+  try {
+    const { tableId } = req.params;
+
+    // Delete all orders linked to this table
+    await OrderItem.deleteMany({ table: tableId });
+    await CustomerOrder.deleteMany({ table: tableId });
+
+    // Delete the table itself
+    await Table.findByIdAndDelete(tableId);
+
+    res.status(200).json({ message: 'Table and related data deleted successfully' });
+  } catch (err) {
+    console.error('Table reset error:', err);
+    res.status(500).json({ error: 'Failed to reset table' });
+  }
+});
+
 
 
 

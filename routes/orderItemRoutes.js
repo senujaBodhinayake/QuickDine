@@ -4,21 +4,21 @@ const OrderItem = require('../models/OrderItem');
 
 // add item to order
 
-router.post('/', async (req, res) => {
-    try {
-        const orderItem = new OrderItem(req.body);
-        await orderItem.save();
-        res.status(201).json(orderItem);
-    } catch (error) {
-        console.error('Error creating order item:', error);
-        res.status(400).json({ error: error.message });
-    }
-});
+// router.post('/', async (req, res) => {
+//     try {
+//         const orderItem = new OrderItem(req.body);
+//         await orderItem.save();
+//         res.status(201).json(orderItem);
+//     } catch (error) {
+//         console.error('Error creating order item:', error);
+//         res.status(400).json({ error: error.message });
+//     }
+// });
 
 // POST /api/order-items/bulk
 router.post('/bulk', async (req, res) => {
   try {
-    const orderItems = await OrderItem.find({ _id: { $in: req.body.ids } }).populate('menuItem');
+    const orderItems = await OrderItem.insertMany(req.body);
     res.status(200).json(orderItems);
   } catch (error) {
     res.status(500).json({ error: error.message });
