@@ -23,6 +23,7 @@ export function CartProvider({ children }) {
       
       return [...prev, { ...item, quantity }];
       
+      
     });
   };
 
