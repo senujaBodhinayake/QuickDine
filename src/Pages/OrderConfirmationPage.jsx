@@ -108,8 +108,9 @@ const OrderConfirmationPage = () => {
   }
 
   return (
+    <div className='min-h-screen bg-gray-50 '>
     <div className='max-w-3xl mx-auto p-6'>
-      <h1 className='text-3xl font-bold text bg-emerald-700 mb-4'>Order Confirmation</h1>
+      <h1 className='text-3xl text-emerald-700 font-bold text bg-emerald-50 mb-4'>Order Confirmation</h1>
 
       <div className='bg-base-100 shadow-md rounded-lg p-6 mb-6'>
         <div className='flex justify-between items-center mb-2'>
@@ -144,7 +145,7 @@ const OrderConfirmationPage = () => {
               </div>
               <div className='flex items-center gap-2'>
                 <span className='text-gray-600 font-semibold'>
-                  ${item.price}
+                  ${item.price * item.quantity}
                 </span>
                 
               </div>
@@ -161,13 +162,13 @@ const OrderConfirmationPage = () => {
         
         <button
          onClick={handleResetTable}
-         className='btn btn-success btn-wide gap-2'>
+         className='btn btn-success btn-wide gap-2 mx-auto'>
           <CheckCircle className='w-5 h-5' />
           Items Received
          </button>
          <button
           onClick={() => setShowCancelModal(true)}
-          className='btn btn-outline btn-error btn-wide gap-2'>
+          className='btn btn-outline btn-error btn-wide gap-2 mx-auto'>
             <X className='w-5 h-5' />
             Cancel Order
          </button>
@@ -192,6 +193,7 @@ const OrderConfirmationPage = () => {
         />
       )}
 
+    </div>
     </div>
   )
 }

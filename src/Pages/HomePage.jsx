@@ -35,7 +35,10 @@ const HomePage = () => {
         }
     }
     return (
-        <div className='h-screen flex flex-col items-center justify-center bg-gray-50 px-4'>
+        <div className='min-h-screen bg-cover bg-center'
+        style={{ backgroundImage: "url('/images/pexels-green.jpg')" }}
+        >
+        <div className='h-screen flex flex-col items-center justify-center px-4'>
             <div className='text-center'>
                 <UtensilsCrossed className='mx-auto mb-4 text-emerald-600' size={48} />
                 <h1 className='text-3xl font-bold text-emerald-700 mb-2'>
@@ -62,6 +65,7 @@ const HomePage = () => {
                 </form>
 
             </div>
+        </div>
         </div>
 
     )

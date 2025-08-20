@@ -6,12 +6,17 @@ import MenuPage from './Pages/MenuPage.jsx'
 import CartPage from './Pages/CartPage.jsx'
 import OrderConfirmationPage from './Pages/OrderConfirmationPage.jsx'
 import toast from 'react-hot-toast';
+import './App.css';
+
 
 
 
 const App = () => {
   return (
-    <div data-theme="emerald">
+
+        
+        <div data-theme="emerald">
+
 
       <Routes>
           
@@ -20,8 +25,11 @@ const App = () => {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/order-confirmation/:orderId" element={<OrderConfirmationPage />} />
       </Routes>
+      </div>
       
-    </div>
+      
+    
+
   )
 }
 
