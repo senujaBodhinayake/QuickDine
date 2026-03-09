@@ -36,7 +36,7 @@ const HomePage = () => {
     }
     return (
         <div className='min-h-screen bg-cover bg-center'
-        style={{ backgroundImage: "url('/images/pexels-green.jpg')" }}
+        style={{ backgroundImage: "url('/images/unsplashfood.jpg')" }}
         >
         <div className='h-screen flex flex-col items-center justify-center px-4'>
             <div className='text-center'>

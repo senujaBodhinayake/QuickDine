@@ -5,6 +5,7 @@ import {useNavigate,useParams} from 'react-router'
 import CancelOrderPopup from '../components/CancelOrderPopup';
 import {toast} from 'react-hot-toast';
 import { CheckCircle,X,Pencil,Trash2, RotateCcw } from 'lucide-react';
+import Footer2 from '../components/Footer2.jsx';
 // import { set } from 'mongoose';
 
 
@@ -37,25 +38,7 @@ const OrderConfirmationPage = () => {
     setOrder(res.data);
   };
 
-  // const handleUpdateItem = async (itemId) =>{
-  //   try {
-  //     await axios.put(`http://localhost:5000/api/order-items/${itemId}`);
-  //     toast.success('Order item updated successfully');
-  //     setEditingItem(null);
-  //   } catch (error) {
-  //     toast.error('Failed to update order item');
-  //   }
-  // }
-
-  // const handleDeleteItem = async (itemId) =>{
-  //   try {
-  //     await axios.delete(`http://localhost:5000/api/order-items/${itemId}`);
-  //     toast.success('Order item deleted successfully');
-  //     refreshOrder();
-  //   } catch (error) {
-  //     toast.error('Failed to delete order item');
-  //   }
-  // };
+  
 
   const handleResetTable = async () => {
   const tableId = order?.table?._id;
@@ -108,7 +91,7 @@ const OrderConfirmationPage = () => {
   }
 
   return (
-    <div className='min-h-screen bg-gray-50 '>
+    <div className='min-h-screen bg-gray-50  pb-24'>
     <div className='max-w-3xl mx-auto p-6'>
       <h1 className='text-3xl text-emerald-700 font-bold text bg-emerald-50 mb-4'>Order Confirmation</h1>
 
@@ -194,6 +177,7 @@ const OrderConfirmationPage = () => {
       )}
 
     </div>
+    <Footer2 />
     </div>
   )
 }

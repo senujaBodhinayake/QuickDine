@@ -6,6 +6,7 @@ import { Link } from 'react-router'
 import {CartContext} from '../context/CartContext.jsx'
 import MenuItemCard from '../components/MenuItemCard.jsx'
 import { categoryInfo } from '../data/categoryInfo.js'
+import Footer from '../components/Footer.jsx'
 
 const MenuPage = () => {
 
@@ -54,7 +55,7 @@ const MenuPage = () => {
   }
 
   return (
-    <div className='min-h-screen bg-gray-50'>
+    <div className='min-h-screen bg-gray-50 '>
 
     
     <div className='sticky top-0 z-50 bg-white shadow-sm px-6 py-4 flex items-center justify-between'>
@@ -121,11 +122,7 @@ const MenuPage = () => {
         })}
 
         
-      {/* <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
-        {filteredItems.map(item => (
-          <MenuItemCard key={item._id} item={item} />
-        ))}
-      </div> */}
+      
       </div>
     
     )}
@@ -133,6 +130,7 @@ const MenuPage = () => {
   
 
     </div>
+    <Footer />
 
   </div>
     

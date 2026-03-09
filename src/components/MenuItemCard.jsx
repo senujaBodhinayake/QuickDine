@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
 import { ShoppingCart,Star } from 'lucide-react'
 
+
 const MenuItemCard = ({ item }) => {
 
     const { addToCart } = useContext(CartContext)
@@ -11,6 +12,7 @@ const MenuItemCard = ({ item }) => {
     
 
   return (
+    
     <div className='card bg-base-100 shadow-md hover:shadow-lg transition'>
         <figure>
             <img src={item.imageUrl} alt={item.name} className='h-40 w-full object-cover' />
@@ -30,8 +32,10 @@ const MenuItemCard = ({ item }) => {
                     </div>
                 )}
             </div>
-        
-      
+           
+    
+   
+   
     </div>
   )
 
